@@ -15,3 +15,4 @@
 
 .idea
 .idea/**
+app/dev_secret.properties

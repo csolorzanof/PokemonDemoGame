@@ -20,8 +20,22 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //buildConfigField("String","MAPS_API_KEY","\"${getMapAPIKey()}\"")
+            resValue("string","MAPS_API_KEY","${getMapAPIKey()}")
+        }
+        debug{
+            //buildConfigField("String","MAPS_API_KEY","\"${getMapAPIKey()}\"")
+            resValue("string","MAPS_API_KEY","${getMapAPIKey()}")
         }
     }
+}
+
+def getMapAPIKey(){
+    def keyFile = file("dev_secret.properties")
+    def keyProperties = new Properties()
+    keyProperties.load(new FileInputStream(keyFile))
+    def apiKey = keyProperties['MAPS_API_KEY']
+    return apiKey
 }
 
 dependencies {
